@@ -1,0 +1,26 @@
+language: php
+
+sudo: false
+
+services:
+    - mysql
+
+cache:
+    directories:
+        - $HOME/.composer/cache/files
+
+matrix:
+    fast_finish: true
+    include:
+        - php: 7.2
+        - php: 7.3
+
+before_install:
+    - phpenv config-rm xdebug.ini || true
+
+install:
+    - composer update --no-interaction
+    - ./vendor/bin/simple-phpunit install
+
+script:
+    - ./vendor/bin/simple-phpunit
