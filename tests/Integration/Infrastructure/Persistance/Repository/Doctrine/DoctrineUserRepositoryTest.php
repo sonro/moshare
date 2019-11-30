@@ -30,7 +30,26 @@ final class DoctrineUserRepositoryTest extends EntityTestCase
         $this->assertNull($result);
     }
 
-    public function testSave()
+    public function testFindOneByEmail()
+    {
+        $email = 'test.name@example.com';
+        $user = $this->repository->findOneByEmail($email);
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertEquals($email, $user->getEmail());
+    }
+
+    public function testFindOne()
+    {
+        $email = 'test.name@example.com';
+        $user = $this->repository->findOneByEmail($email);
+        $this->assertEquals($email, $user->getEmail());
+        $id = $user->getId();
+
+        $result = $this->repository->findOne($id);
+        $this->assertEquals($user, $result);
+    }
+
+    public function testAdd()
     {
         $user = new User();
         $user->setActive(false);
@@ -45,5 +64,43 @@ final class DoctrineUserRepositoryTest extends EntityTestCase
         $this->entityManager->flush();
 
         $this->assertIsInt($user->getId());
+    }
+
+    public function testRemove()
+    {
+        $email = 'test.name@example.com';
+        $user = $this->repository->findOneByEmail($email);
+        $this->assertEquals($email, $user->getEmail());
+
+        $this->repository->remove($user);
+        $this->entityManager->flush();
+
+        $user = $this->repository->findOneByEmail($email);
+        $this->assertNull($user);
+    }
+
+    public function testFindAll()
+    {
+        $result = $this->repository->findAll();
+        $this->assertNotEmpty($result);
+        $this->assertInstanceOf(User::class, $result[0]);
+    }
+
+    public function testSize()
+    {
+        $result = $this->repository->size();
+        $this->assertGreaterThan(0, $result);
+
+        $user = new User();
+        $user->setActive(false);
+        $user->setEmail('test@example.com');
+        $user->setFirstname('Test');
+        $user->setLastname('Name');
+        $user->setPassword('password');
+        $this->repository->add($user);
+        $this->entityManager->flush();
+
+        $newResult = $this->repository->size();
+        $this->assertEquals($result + 1, $newResult);
     }
 }
