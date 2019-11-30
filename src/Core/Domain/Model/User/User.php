@@ -27,7 +27,7 @@ class User extends AbstractDomainEntity implements UserInterface
     /**
      * @var array
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @var string

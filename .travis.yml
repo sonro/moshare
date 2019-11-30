@@ -14,6 +14,7 @@ matrix:
     include:
         - php: 7.2
         - php: 7.3
+        - php: 7.4
 
 before_install:
     - phpenv config-rm xdebug.ini || true
@@ -22,5 +23,13 @@ install:
     - composer update --no-interaction
     - ./vendor/bin/simple-phpunit install
 
+before_script:
+    - ./bin/console doctrine:database:create --env=test
+    - ./bin/console doctrine:schema:update --env=test --force
+    - ./bin/console doctrine:fixtures:load --env=test -n
+
 script:
     - ./vendor/bin/simple-phpunit
+
+after_script:
+    - ./bin/console doctrine:database:drop --env=test --force
