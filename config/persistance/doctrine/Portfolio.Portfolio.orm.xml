@@ -13,10 +13,9 @@
             target-entity="App\Core\Domain\Model\Account\Account" 
             mapped-by="portfolio" />
 
-        <one-to-many field="userPortfolios" 
-            target-entity="App\Core\Domain\Model\User\UserPortfolio" 
-            mapped-by="portfolio" 
-            orphan-removal="true" />
+        <many-to-many field="users" 
+            target-entity="App\Core\Domain\Model\Portfolio\Portfolio" 
+            mapped-by="portfolios" />
     </entity>
 
 </doctrine-mapping>

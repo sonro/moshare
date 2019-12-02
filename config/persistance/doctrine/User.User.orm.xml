@@ -12,10 +12,9 @@
         <field name="password" type="string" length="190" />
         <field name="active" type="boolean" />
 
-        <one-to-many field="userPortfolios" 
-            target-entity="App\Core\Domain\Model\User\UserPortfolio" 
-            mapped-by="user" 
-            orphan-removal="true" />
+        <many-to-many field="portfolios" 
+            target-entity="App\Core\Domain\Model\Portfolio\Portfolio" 
+            inversed-by="users" />
     </entity>
 
 </doctrine-mapping>

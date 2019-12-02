@@ -24,6 +24,9 @@
 
         </many-to-one>
 
+        <embedded name="priviledge"
+            class="App\Core\Domain\Model\Account\Priviledge" />
+
     </entity>
 
 </doctrine-mapping>

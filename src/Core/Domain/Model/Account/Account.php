@@ -22,6 +22,16 @@ class Account extends AbstractDomainEntity
     private $ledger;
 
     /**
+     * @var Priviledge
+     */
+    private $priviledge;
+
+    public function __construct()
+    {
+        $this->priviledge = new Priviledge(Priviledge::SOLO_EDIT);
+    }
+
+    /**
      * Get the value of name.
      *
      * @return string
@@ -89,6 +99,30 @@ class Account extends AbstractDomainEntity
     public function setLedger(?Ledger $ledger)
     {
         $this->ledger = $ledger;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of priviledge.
+     *
+     * @return Priviledge
+     */
+    public function getPriviledge()
+    {
+        return $this->priviledge;
+    }
+
+    /**
+     * Set the value of priviledge.
+     *
+     * @param Priviledge $priviledge
+     *
+     * @return self
+     */
+    public function setPriviledge(Priviledge $priviledge)
+    {
+        $this->priviledge = $priviledge;
 
         return $this;
     }

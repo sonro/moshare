@@ -42,42 +42,42 @@ class User extends AbstractDomainEntity implements UserInterface
     /**
      * @var Collection
      */
-    private $userPortfolios;
+    private $portfolios;
 
     public function __construct()
     {
-        $this->userPortfolios = new ArrayCollection();
+        $this->portfolios = new ArrayCollection();
     }
 
     /**
-     * Add a UserPortfolio to this User.
+     * Add a Portfolio to this User.
      *
-     * @param UserPortfolio $userPortfolios
+     * @param Portfolio $portfolio
      *
      * @return self
      */
-    public function addUserPortfolio(UserPortfolio $userPortfolio): self
+    public function addPortfolio(Portfolio $portfolio): self
     {
-        if (!$this->userPortfolios->contains($userPortfolio)) {
-            $this->userPortfolios->add($userPortfolio);
-            $userPortfolio->setUser($this);
+        if (!$this->portfolios->contains($portfolio)) {
+            $this->portfolios->add($portfolio);
+            $portfolio->setUser($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove a UserPortfolio from this User.
+     * Remove a Portfolio from this User.
      *
-     * @param UserPortfolio $userPortfolio
+     * @param Portfolio $portfolio
      *
      * @return self
      */
-    public function removeUserPortfolio(UserPortfolio $userPortfolio): self
+    public function removePortfolio(Portfolio $portfolio): self
     {
-        if ($this->userPortfolios->contains($userPortfolio)) {
-            $this->userPortfolios->removeElement($userPortfolio);
-            $userPortfolio->setUser(null);
+        if ($this->portfolios->contains($portfolio)) {
+            $this->portfolios->removeElement($portfolio);
+            $portfolio->setUser(null);
         }
 
         return $this;

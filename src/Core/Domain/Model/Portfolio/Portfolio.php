@@ -4,7 +4,7 @@ namespace App\Core\Domain\Model\Portfolio;
 
 use App\Core\Domain\Model\Account\Account;
 use App\Core\Domain\Model\Shared\AbstractDomainEntity;
-use App\Core\Domain\Model\User\UserPortfolio;
+use App\Core\Domain\Model\User\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -18,7 +18,7 @@ class Portfolio extends AbstractDomainEntity
     /**
      * @var Collection
      */
-    private $userPortfolios;
+    private $users;
 
     /**
      * @var bool
@@ -32,52 +32,52 @@ class Portfolio extends AbstractDomainEntity
 
     public function __construct()
     {
-        $this->userPortfolios = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->accounts = new ArrayCollection();
     }
 
     /**
-     * Add a UserPortfolio to this Portfolio.
+     * Add a User to this Portfolio.
      *
-     * @param UserPortfolio $userPortfolios
+     * @param User $user
      *
      * @return self
      */
-    public function addUserPortfolio(UserPortfolio $userPortfolio): self
+    public function addUser(User $user): self
     {
-        if (!$this->userPortfolios->contains($userPortfolio)) {
-            $this->userPortfolios->add($userPortfolio);
-            $userPortfolio->addPortfolio($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addPortfolio($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove a UserPortfolio from this Portfolio.
+     * Remove a User from this Portfolio.
      *
-     * @param UserPortfolio $userPortfolio
+     * @param User $user
      *
      * @return self
      */
-    public function removeUserPortfolio(UserPortfolio $userPortfolio): self
+    public function removeUser(User $user): self
     {
-        if ($this->userPortfolios->contains($userPortfolio)) {
-            $this->userPortfolios->removeElement($userPortfolio);
-            $userPortfolio->setPortfolio(null);
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->setPortfolio(null);
         }
 
         return $this;
     }
 
     /**
-     * Get the UserPortfolio Collection.
+     * Get the User Collection.
      *
      * @return Collection
      */
-    public function getUserPortfolios()
+    public function getUsers()
     {
-        return $this->userPortfolios;
+        return $this->users;
     }
 
     /**
