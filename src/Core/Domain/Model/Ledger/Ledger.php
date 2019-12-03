@@ -18,9 +18,15 @@ class Ledger extends AbstractDomainEntity
      */
     private $accounts;
 
+    /**
+     * @var Collection
+     */
+    private $transactions;
+
     public function __construct()
     {
         $this->accounts = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     /**
@@ -86,6 +92,50 @@ class Ledger extends AbstractDomainEntity
         if ($this->accounts->contains($account)) {
             $this->accounts->removeElement($account);
             $account->setLedger(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of transactions.
+     *
+     * @return Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Add an transaction to this ledger.
+     *
+     * @param Transaction $transaction
+     *
+     * @return self
+     */
+    public function addTransaction(Transaction $transaction)
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions->add($transaction);
+            $transaction->setLedger($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add an transaction to this ledger.
+     *
+     * @param Transaction $transaction
+     *
+     * @return self
+     */
+    public function removeTransaction(Transaction $transaction)
+    {
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
+            $transaction->setLedger(null);
         }
 
         return $this;

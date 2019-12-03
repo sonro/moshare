@@ -6,8 +6,13 @@
     
     <entity name="App\Core\Domain\Model\Ledger\Ledger">
         <field name="name" type="string" length="190" />
+
         <one-to-many field="accounts" 
             target-entity="App\Core\Domain\Model\Account\Account" 
+            mapped-by="ledger" />
+
+        <one-to-many field="transactions" 
+            target-entity="App\Core\Domain\Model\Transaction\Transaction" 
             mapped-by="ledger" />
     </entity>
 

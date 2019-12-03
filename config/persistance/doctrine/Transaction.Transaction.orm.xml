@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    
+    <entity name="App\Core\Domain\Model\Transaction\Transaction">
+        <field name="title" type="string" length="64" />
+
+        <field name="description" type="text" />
+
+        <many-to-one field="from"
+            target-entity="App\Core\Domain\Model\Transaction\Transactor">
+
+            <join-column name="from_transactor_id" 
+                referenced-column-name="id" />
+
+        </many-to-one>
+
+        <many-to-one field="to"
+           target-entity="App\Core\Domain\Model\Transaction\Transactor">
+            <join-column name="to_transactor_id" 
+                referenced-column-name="id" />
+
+        </many-to-one>
+
+        <field name="value" type="integer" />
+
+        <many-to-one field="ledger" 
+            target-entity="App\Core\Domain\Model\Ledger\Ledger" 
+            inversed-by="transactions" />
+
+        <field name="splitEvenly" type="boolean" />
+
+        <many-to-many field="liableAccounts"
+            target-entity="App\Core\Domain\Model\Account\Account" >
+
+             <join-table name="transaction_liable_account">
+                <join-columns>
+                    <join-column name="transaction_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="account_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+
+        </many-to-many>
+
+    </entity>
+
+</doctrine-mapping>
