@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Persistance\Repository\Doctrine\Common;
 
+use App\Core\Domain\Model\Shared\AbstractDomainEntity;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -35,5 +36,15 @@ trait DoctrineEntityRepositoryTrait
             ->from(self::ENTITY, 'entity')
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function add(AbstractDomainEntity $entity): void
+    {
+        $this->entityManager->persist($entity);
+    }
+
+    public function remove(AbstractDomainEntity $entity): void
+    {
+        $this->entityManager->remove($entity);
     }
 }

@@ -11,8 +11,4 @@ interface UserRepositoryInterface extends EntityRepositoryInterface
     public function findOne(int $id): ?User;
 
     public function findOneByEmail(string $email): ?User;
-
-    public function add(User $user): void;
-
-    public function remove(User $user): void;
 }

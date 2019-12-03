@@ -11,8 +11,4 @@ interface LedgerRepositoryInterface extends EntityRepositoryInterface
     public function findOne(int $id): ?Ledger;
 
     public function findOneByName(string $name): ?Ledger;
-
-    public function add(Ledger $user): void;
-
-    public function remove(Ledger $user): void;
 }

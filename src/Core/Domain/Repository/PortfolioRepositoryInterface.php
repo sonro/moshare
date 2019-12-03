@@ -11,8 +11,4 @@ interface PortfolioRepositoryInterface extends EntityRepositoryInterface
     public function findOne(int $id): ?Portfolio;
 
     public function findOneByName(string $name): ?Portfolio;
-
-    public function add(Portfolio $user): void;
-
-    public function remove(Portfolio $user): void;
 }

@@ -19,14 +19,4 @@ final class DoctrineUserRepository implements UserRepositoryInterface
     {
         return $this->doctrineRepository->findOneBy(['email' => $email]);
     }
-
-    public function add(User $user): void
-    {
-        $this->entityManager->persist($user);
-    }
-
-    public function remove(User $user): void
-    {
-        $this->entityManager->remove($user);
-    }
 }

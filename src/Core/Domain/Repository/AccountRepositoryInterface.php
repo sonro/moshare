@@ -11,8 +11,4 @@ interface AccountRepositoryInterface extends EntityRepositoryInterface
     public function findOne(int $id): ?Account;
 
     public function findOneByName(string $name): ?Account;
-
-    public function add(Account $user): void;
-
-    public function remove(Account $user): void;
 }

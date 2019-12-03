@@ -11,8 +11,4 @@ interface TransactorRepositoryInterface extends EntityRepositoryInterface
     public function findOne(int $id): ?Transactor;
 
     public function findOneByName(string $name): ?Transactor;
-
-    public function add(Transactor $user): void;
-
-    public function remove(Transactor $user): void;
 }
