@@ -2,6 +2,8 @@
 
 namespace App\Core\Domain\Model\Account;
 
+use App\Core\Domain\Model\Ledger\Ledger;
+use App\Core\Domain\Model\Portfolio\Portfolio;
 use App\Core\Domain\Model\Shared\AbstractDomainEntity;
 
 class Account extends AbstractDomainEntity
