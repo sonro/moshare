@@ -10,7 +10,8 @@
         <field name="description" type="text" />
 
         <many-to-one field="from"
-            target-entity="App\Core\Domain\Model\Transaction\Transactor">
+            target-entity="App\Core\Domain\Model\Transaction\Transactor"
+            cascade="persist">
 
             <join-column name="from_transactor_id" 
                 referenced-column-name="id" />
@@ -18,7 +19,8 @@
         </many-to-one>
 
         <many-to-one field="to"
-           target-entity="App\Core\Domain\Model\Transaction\Transactor">
+           target-entity="App\Core\Domain\Model\Transaction\Transactor"
+           cascade="persist">
             <join-column name="to_transactor_id" 
                 referenced-column-name="id" />
 
