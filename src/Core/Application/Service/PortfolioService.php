@@ -3,6 +3,7 @@
 namespace App\Core\Application\Service;
 
 use App\Core\Domain\Model\Portfolio\Portfolio;
+use App\Core\Domain\Model\User\User;
 use App\Core\Domain\Repository\PortfolioRepositoryInterface;
 
 final class PortfolioService
@@ -29,5 +30,10 @@ final class PortfolioService
         $this->repository->add($portfolio);
 
         return $portfolio;
+    }
+
+    public function fetchAllForUser(User $user): array
+    {
+        return $this->repository->findAllByUser($user);
     }
 }

@@ -17,6 +17,14 @@ final class DoctrineUserRepository implements UserRepositoryInterface
 
     public function findOneByEmail(string $email): ?User
     {
-        return $this->doctrineRepository->findOneBy(['email' => $email]);
+        return $this->entityManager->createQueryBuilder()
+            ->select('user, portfolios')
+            ->from(self::ENTITY, 'user')
+            ->join('user.portfolios', 'portfolios')
+            ->where('user.email=:email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+        // return $this->doctrineRepository->findOneBy(['email' => $email]);
     }
 }
