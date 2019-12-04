@@ -2,6 +2,7 @@
 
 namespace App\Core\Domain\Model\User;
 
+use App\Core\Domain\Model\Portfolio\Portfolio;
 use App\Core\Domain\Model\Shared\AbstractDomainEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -60,7 +61,7 @@ class User extends AbstractDomainEntity implements UserInterface
     {
         if (!$this->portfolios->contains($portfolio)) {
             $this->portfolios->add($portfolio);
-            $portfolio->setUser($this);
+            $portfolio->addUser($this);
         }
 
         return $this;

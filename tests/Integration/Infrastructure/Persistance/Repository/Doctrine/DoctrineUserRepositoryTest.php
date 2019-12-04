@@ -32,7 +32,7 @@ final class DoctrineUserRepositoryTest extends EntityTestCase
 
     public function testFindOneByEmail()
     {
-        $email = 'test.name@example.com';
+        $email = 'test.name.one@example.com';
         $user = $this->repository->findOneByEmail($email);
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals($email, $user->getEmail());
@@ -40,7 +40,7 @@ final class DoctrineUserRepositoryTest extends EntityTestCase
 
     public function testFindOne()
     {
-        $email = 'test.name@example.com';
+        $email = 'test.name.one@example.com';
         $user = $this->repository->findOneByEmail($email);
         $this->assertEquals($email, $user->getEmail());
         $id = $user->getId();
@@ -68,7 +68,7 @@ final class DoctrineUserRepositoryTest extends EntityTestCase
 
     public function testRemove()
     {
-        $email = 'test.name@example.com';
+        $email = 'test.name.one@example.com';
         $user = $this->repository->findOneByEmail($email);
         $this->assertEquals($email, $user->getEmail());
 

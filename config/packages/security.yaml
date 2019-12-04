@@ -1,16 +1,19 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        custom:
-            id: App\Infrastructure\Security\Provider\SymfonyUserProvider
     encoders:
-            App\Domain\Model\User\User: argon21
+            App\Core\Domain\Model\User\User: 
+                algorithm: auto
+    providers:
+        main:
+            id: App\Infrastructure\Security\Provider\SymfonyUserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            provider: main
         main:
             anonymous: lazy
+            provider: main
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

@@ -14,7 +14,7 @@
             mapped-by="portfolio" />
 
         <many-to-many field="users" 
-            target-entity="App\Core\Domain\Model\Portfolio\Portfolio" 
+            target-entity="App\Core\Domain\Model\User\User" 
             mapped-by="portfolios" />
     </entity>
 
