@@ -14,7 +14,18 @@
 
         <many-to-many field="portfolios" 
             target-entity="App\Core\Domain\Model\Portfolio\Portfolio" 
-            inversed-by="users" />
+            inversed-by="users">
+
+             <join-table name="user_portfolio">
+                <join-columns>
+                    <join-column name="user_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="portfolio_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+
+        </many-to-many>
     </entity>
 
 </doctrine-mapping>

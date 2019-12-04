@@ -2,7 +2,9 @@
 
 namespace App\Core\Domain\Model\Ledger;
 
+use App\Core\Domain\Model\Account\Account;
 use App\Core\Domain\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Model\Transaction\Transaction;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -125,7 +127,7 @@ class Ledger extends AbstractDomainEntity
     }
 
     /**
-     * Add an transaction to this ledger.
+     * remove an transaction to this ledger.
      *
      * @param Transaction $transaction
      *
@@ -135,7 +137,7 @@ class Ledger extends AbstractDomainEntity
     {
         if ($this->transactions->contains($transaction)) {
             $this->transactions->removeElement($transaction);
-            $transaction->setLedger(null);
+            // $transaction->setLedger(null);
         }
 
         return $this;

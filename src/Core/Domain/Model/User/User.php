@@ -78,7 +78,7 @@ class User extends AbstractDomainEntity implements UserInterface
     {
         if ($this->portfolios->contains($portfolio)) {
             $this->portfolios->removeElement($portfolio);
-            $portfolio->setUser(null);
+            $portfolio->removeUser($this);
         }
 
         return $this;
@@ -252,5 +252,15 @@ class User extends AbstractDomainEntity implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    /**
+     * Get the value of portfolios.
+     *
+     * @return Collection
+     */
+    public function getPortfolios()
+    {
+        return $this->portfolios;
     }
 }

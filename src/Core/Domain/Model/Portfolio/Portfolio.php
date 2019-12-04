@@ -64,7 +64,7 @@ class Portfolio extends AbstractDomainEntity
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->setPortfolio(null);
+            $user->removePortfolio($this);
         }
 
         return $this;

@@ -15,7 +15,9 @@
 
         <many-to-many field="users" 
             target-entity="App\Core\Domain\Model\User\User" 
-            mapped-by="portfolios" />
+            mapped-by="portfolios">
+
+        </many-to-many>
     </entity>
 
 </doctrine-mapping>
