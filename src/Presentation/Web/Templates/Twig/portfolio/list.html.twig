@@ -1,0 +1,32 @@
+{% extends "@Web/base.html.twig" %}
+
+{% block body %}
+    <h1>Portfolio List</h1>
+    <table>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Users</th>
+        <th>Accounts</th>
+    {% for portfolio in portfolios %}
+        <tr>
+            <td>{{ portfolio.id }}</td>
+            <td>{{ portfolio.name }}</td>
+            <td>
+                {% for user in portfolio.users %}
+                    <span class="portoflio-list__user">{{ user.firstname }} {{ user.lastname }}</span>
+                {% endfor %}
+            </td>
+            <td>
+                {% for account in portfolio.accounts %}
+                    <span class="portfolio-list__ledger">
+                        {{ account.ledger.name }}
+                        {% if account.priviledge.type != constant('App\\Core\\Domain\\Model\\Account\\Priviledge::SOLO_EDIT') %}
+                        <span class="portfolio-list__account-priviledge">{{ account.priviledge.type }}</span>
+                        {% endif %}
+                    </span>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
