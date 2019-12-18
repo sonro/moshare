@@ -23,8 +23,10 @@ final class PortfolioController extends AbstractController
      */
     private $userRepository;
 
-    public function __construct(PortfolioService $service, UserRepositoryInterface $userRepository)
-    {
+    public function __construct(
+        PortfolioService $service,
+        UserRepositoryInterface $userRepository
+    ) {
         $this->service = $service;
         $this->userRepository = $userRepository;
     }
@@ -34,7 +36,9 @@ final class PortfolioController extends AbstractController
      */
     public function list()
     {
-        $user = $this->userRepository->findOneByEmail('test.name.three@example.com');
+        $user = $this->userRepository->findOneByEmail(
+            'test.name.three@example.com'
+        );
         $portfolios = $this->service->fetchAllForUser($user);
 
         return $this->render('@Web/portfolio/list.html.twig', [
