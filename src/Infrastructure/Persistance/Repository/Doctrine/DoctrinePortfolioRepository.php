@@ -11,6 +11,8 @@ final class DoctrinePortfolioRepository implements PortfolioRepositoryInterface
 {
     use DoctrineEntityRepositoryTrait;
 
+    private $entityClassName = self::ENTITY;
+
     public function findOne(int $id): ?Portfolio
     {
         return $this->doctrineRepository->find($id);
@@ -23,13 +25,9 @@ final class DoctrinePortfolioRepository implements PortfolioRepositoryInterface
 
     public function findAllByUser(User $user): array
     {
-        $query = $this->entityManager->createQueryBuilder()
-            ->select(
-                'portfolio'
-                .',users'
-                .',accounts'
-                .',ledger'
-            )
+        $query = $this->entityManager
+            ->createQueryBuilder()
+            ->select('portfolio'.',users'.',accounts'.',ledger')
             ->from(self::ENTITY, 'portfolio')
             ->join('portfolio.accounts', 'accounts')
             ->join('accounts.ledger', 'ledger')

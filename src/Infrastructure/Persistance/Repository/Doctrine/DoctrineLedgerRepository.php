@@ -10,6 +10,8 @@ final class DoctrineLedgerRepository implements LedgerRepositoryInterface
 {
     use DoctrineEntityRepositoryTrait;
 
+    private $entityClassName = self::ENTITY;
+
     public function findOne(int $id): ?Ledger
     {
         return $this->doctrineRepository->find($id);

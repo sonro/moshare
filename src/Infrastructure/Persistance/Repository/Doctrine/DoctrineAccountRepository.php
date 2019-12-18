@@ -10,6 +10,8 @@ final class DoctrineAccountRepository implements AccountRepositoryInterface
 {
     use DoctrineEntityRepositoryTrait;
 
+    private $entityClassName = self::ENTITY;
+
     public function findOne(int $id): ?Account
     {
         return $this->doctrineRepository->find($id);

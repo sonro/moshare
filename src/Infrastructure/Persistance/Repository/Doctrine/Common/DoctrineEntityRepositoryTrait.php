@@ -3,8 +3,8 @@
 namespace App\Infrastructure\Persistance\Repository\Doctrine\Common;
 
 use App\Core\Domain\Model\Shared\AbstractDomainEntity;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 
 trait DoctrineEntityRepositoryTrait
 {
@@ -18,10 +18,17 @@ trait DoctrineEntityRepositoryTrait
      */
     private $doctrineRepository;
 
+    // /**
+    //  * @var string
+    //  */
+    // protected $entityClassName;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->doctrineRepository = $entityManager->getRepository(self::ENTITY);
+        $this->doctrineRepository = $entityManager->getRepository(
+            $this->entityClassName
+        );
     }
 
     public function findAll(): array
@@ -31,9 +38,10 @@ trait DoctrineEntityRepositoryTrait
 
     public function size(): int
     {
-        return $this->entityManager->createQueryBuilder()
+        return $this->entityManager
+            ->createQueryBuilder()
             ->select('count(entity.id)')
-            ->from(self::ENTITY, 'entity')
+            ->from($this->entityClassName, 'entity')
             ->getQuery()
             ->getSingleScalarResult();
     }

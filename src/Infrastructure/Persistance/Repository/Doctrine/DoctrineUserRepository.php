@@ -10,6 +10,8 @@ final class DoctrineUserRepository implements UserRepositoryInterface
 {
     use DoctrineEntityRepositoryTrait;
 
+    private $entityClassName = self::ENTITY;
+
     public function findOne(int $id): ?User
     {
         return $this->doctrineRepository->find($id);
@@ -17,7 +19,8 @@ final class DoctrineUserRepository implements UserRepositoryInterface
 
     public function findOneByEmail(string $email): ?User
     {
-        return $this->entityManager->createQueryBuilder()
+        return $this->entityManager
+            ->createQueryBuilder()
             ->select('user, portfolios')
             ->from(self::ENTITY, 'user')
             ->join('user.portfolios', 'portfolios')

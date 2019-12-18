@@ -10,6 +10,8 @@ final class DoctrineTransactionRepository implements TransactionRepositoryInterf
 {
     use DoctrineEntityRepositoryTrait;
 
+    private $entityClassName = self::ENTITY;
+
     public function findOne(int $id): ?Transaction
     {
         return $this->doctrineRepository->find($id);
