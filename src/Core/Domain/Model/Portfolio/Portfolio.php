@@ -149,7 +149,7 @@ class Portfolio extends AbstractDomainEntity
     {
         if (!$this->accounts->contains($account)) {
             $this->accounts->add($account);
-            $account->addPortfolio($this);
+            $account->setPortfolio($this);
         }
 
         return $this;
